@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=orbitPanel
+comment1.params=pi\ pf\ WindowWidth\ WindowHeight
+comment1.target=orbitPanel(pos,\ pos,\ int,\ int)
+comment2.params=
+comment2.target=void\ draw()
+comment3.params=
+comment3.target=void\ run()
+comment4.params=e
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=
+comment5.target=void\ run()
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=prevRad\ Vel
+comment7.target=vec\ integratorOfRadius(vec,\ vec)
+comment8.params=prevRad\ prevVel
+comment8.target=vec\ integratorOfVelocity(vec,\ vec)
+comment9.params=g
+comment9.target=void\ paintComponent(java.awt.Graphics)
+numComments=10

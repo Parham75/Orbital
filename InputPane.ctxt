@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.params=space\ width\ height\ LabelColor\ BackColor
+comment0.target=InputPane(int,\ int,\ int,\ java.awt.Color,\ java.awt.Color)
+numComments=1

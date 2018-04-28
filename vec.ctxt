@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=x\ y\ z
+comment0.target=vec(double,\ double,\ double)
+comment1.params=a
+comment1.target=double\ getMag(vec)
+comment2.params=a\ b
+comment2.target=vec\ getSub(vec,\ vec)
+comment3.params=a\ b
+comment3.target=vec\ getSum(vec,\ vec)
+comment4.params=a\ b
+comment4.target=vec\ getSCpro(vec,\ double)
+comment5.params=a\ b
+comment5.target=vec\ getCross(vec,\ vec)
+numComments=6

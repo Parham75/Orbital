@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.params=pi\ pf
+comment0.target=Hohmann(pos,\ pos)
+comment1.params=
+comment1.target=pos\ posHohStarter()
+comment2.params=
+comment2.target=pos\ posHoh1()
+comment3.params=
+comment3.target=pos\ posHoh2()
+comment4.params=
+comment4.target=pos\ posHoh3()
+comment5.params=
+comment5.target=double\ Time1()
+comment6.params=
+comment6.target=double\ Time2()
+comment7.params=
+comment7.target=vec\ getHohdv1()
+comment8.params=
+comment8.target=vec\ getHohdv2()
+comment9.params=
+comment9.target=double\ getEnergyHoh()
+numComments=10

@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=space\ width\ height\ LabelColor\ BackColor
+comment0.target=GUIShowVelPos(int,\ int,\ int,\ java.awt.Color,\ java.awt.Color)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ GUIShowVelPos\r\n
+numComments=1

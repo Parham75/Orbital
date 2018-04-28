@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=OrbitPane
+comment0.text=\n\ Write\ a\ description\ of\ class\ OrbitPane\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=space\ width\ height\ pi\ pf\ WindowWidth\ WindowHeight\ LabelColor\ BackColor
+comment1.target=OrbitPane(int,\ int,\ int,\ pos,\ pos,\ int,\ int,\ java.awt.Color,\ java.awt.Color)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ OrbitPane\n
+comment2.params=g
+comment2.target=void\ paint(java.awt.Graphics)
+numComments=3
