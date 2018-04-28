@@ -33,6 +33,7 @@ public class Main
         GUIStarter win1 = new GUIStarter(space,width,height,LabelColor,BackColor);
         
         Controller con = new Controller(win1);
+        
         win1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         win1.setVisible(true);
         
