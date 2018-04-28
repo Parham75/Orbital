@@ -20,7 +20,7 @@ public class Controller implements ActionListener
         
         gs.sp.jbShowVelPos.addActionListener(this);
         gs.sp.jbHoh.addActionListener(this);
-        gs.sp.jbContact.addActionListener(this);
+        
         gs.sp.jbAbout.addActionListener(this);
         gs.sp.jbExit.addActionListener(this);
 
@@ -56,14 +56,11 @@ public class Controller implements ActionListener
             
         if(ae.getSource()==gs.sp.jbAbout){
             
-            infoBox(" This program was made by Mohammad kordzanganeh in form of a computer science project\nSaint Brendan's Sixth Form College\nFeb 2017"
+            infoBox(" This program was made by 2xmo for studenthack vi 2018"
             ,"About Us");
         }
         
-        if(ae.getSource()==gs.sp.jbContact){
-            infoBox(" For further information please contact the following email : \n 161881@student.stbrn.ac.uk"
-            ,"Contact Us");
-        }
+        
         // To prevent NullPointerException, I personally prefer this method over try and catch.    
         if(input !=null){
             

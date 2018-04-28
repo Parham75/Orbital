@@ -9,7 +9,7 @@ public class StarterPane extends JPanel
     
     JButton jbHoh = new JButton("Circular Hohmann");
     JButton jbShowVelPos = new JButton ("Show Velocity and Position");
-    JButton jbContact = new JButton("Contact Us");
+    
     JButton jbAbout = new JButton("About Us");
     JButton jbExit = new JButton("Exit");
 
@@ -23,7 +23,7 @@ public class StarterPane extends JPanel
         jlChoose.setBounds(space,3*space+2*height,width,height);
         jbShowVelPos.setBounds(space,4*space+3*height,width,height);
         jbHoh.setBounds(space,5*space+4*height,width,height);
-        jbContact.setBounds(space,6*space+5*height,width,height);
+        
         jbAbout.setBounds(space,7*space+6*height,width,height);
         // Exit Button should be half as wide as the other buttons
         int ExitWidth = width/2;
@@ -38,7 +38,7 @@ public class StarterPane extends JPanel
         add(jlChoose);
         add(jbShowVelPos);
         add(jbHoh);
-        add(jbContact);
+        
         add(jbAbout);
         add(jbExit);
     }// end of constructor of the class StarterPane
