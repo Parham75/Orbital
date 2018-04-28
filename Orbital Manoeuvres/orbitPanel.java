@@ -4,6 +4,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.lang.Object;
+import java.util.Random; 
+import java.io.*; 
+import java.io.PrintWriter; 
 
 public class orbitPanel extends JPanel 
 {
@@ -22,6 +25,10 @@ public class orbitPanel extends JPanel
            M = 5.97*Math.pow(10,24);
     Hohmann hoh;
     int t;
+    
+    PrintWriter writer;
+    
+
     //constructor
     public orbitPanel(pos pi,pos pf,int WindowWidth,int WindowHeight ){
         Pi=pi;Pf=pf;
@@ -29,6 +36,7 @@ public class orbitPanel extends JPanel
         ovals = new ArrayList<>();
         this.WidthAdjust = WindowWidth/2;
         this.HeightAdjust = WindowHeight/2;
+        
         
         /**
          *Making two circles around the earth, representing the orbits,
@@ -47,12 +55,23 @@ public class orbitPanel extends JPanel
             //therefore when added to the JPanel, one point of the second orbit goes after one from the first one.
             ovals.add(new Oval((int) (man.getvr(b).x / EarthAdjust) + WidthAdjust, (int) (man.getvr(b).y / EarthAdjust) + HeightAdjust, 1, 1));
         }
-
+        //for(int i=0;i<2;i++){
         Vector  = new vec(0,0,0);
+        vec vvv = new vec(0,60,0);
         R = man.getvr(Pi);V=man.getvv(Pi);
         hoh = new Hohmann(pi,pf);
         threadKill=false;
         repaintThreadKill=false;
+               try{
+        writer = new PrintWriter("/files/name"+".txt", "UTF-8");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("setup failed");
+        }draw();//}
+        
+        
+        
     }// end constructor
     
     //draw() is a method and will be called directly from inside of the Controller to invoker the animations and calculations.
@@ -63,7 +82,8 @@ public class orbitPanel extends JPanel
        {
            @Override
            public void run() {
-                
+               
+               
                // A timer to take the integration with.
                Timer timer = new Timer(1, new ActionListener() {
                    @Override
@@ -72,20 +92,37 @@ public class orbitPanel extends JPanel
                        if(threadKill ==true){thread.interrupt();}
                        //t helps us keep track of the real time. t and deltat are both in seconds.
                        t+=deltat;
+                       Random rand = new Random(); 
+                       double dx = rand.nextDouble()*10-5;
+                       double dy = rand.nextDouble()*10-5;
+                       
+                           
+                       writer.print(dx+ "  ");
+                       writer.println(dy);
+                       
+                       
                       
-                       double dx = 0.000001;
-                       double dy = 0.000001;
                        vec dv = new vec(dx,dy,0);
                        //first Hohmann impulse
                        if(t>hoh.Time1()-deltat/2){
                            V=Vector.getSub(V,dv);
+                           if(Vector.getMag(R) < Vector.getMag(man.getvr(Pi))+100 && Vector.getMag(R) > Vector.getMag(man.getvr(Pi))-100){
+                               ((Timer)e.getSource()).stop();
+                               thread.interrupt();
+                            }
                        }
+                       if(t>hoh.Time1()-deltat/2 && t<hoh.Time1()+deltat/2){
+                           vec deltav = new vec(+1000,0,0);
+                           V=Vector.getSub(V,deltav);
+                       }
+                       
                        //second Hohmann impulse 
                        R = integratorOfRadius(R, V);
                        V = integratorOfVelocity(R, V);
                        
                    }
                });
+               
                timer.start();
 
 
