@@ -12,7 +12,7 @@ public class GUIInput extends JFrame
     //Notice how three dimension defining variables are passed through. 
     public GUIInput(int space,int width,int height,Color LabelColor,Color BackColor)
     {
-        super("Input for Hohmann");
+        super("Input for Satellite Radius");
           this.space = space;
           this.width = width;
           this.height = height;
