@@ -175,6 +175,7 @@ public class Controller implements ActionListener
             }
             
             if(ae.getSource()==go.op.jbBack){
+
                 // Kill the threads so as to stop the running animation and calculations.
                 go.op.op.threadKill = true;
                 go.op.op.repaintThreadKill = true;
@@ -188,7 +189,6 @@ public class Controller implements ActionListener
             }
             
             if(ae.getSource()==go.op.jbDraw){
-                
                 
                 go.op.op.draw();
                 

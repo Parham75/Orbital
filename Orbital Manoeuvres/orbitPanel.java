@@ -7,37 +7,49 @@ import java.lang.Object;
 import java.util.Random; 
 import java.io.*; 
 import java.io.PrintWriter; 
+import java.util.Scanner;
 
-public class orbitPanel extends JPanel 
+public class orbitPanel extends JPanel
 {
 
     public static ArrayList<Oval> ovals;
     Maneuvers man;
+    boolean flag;
     Thread thread,repaintThread;
     int WidthAdjust,HeightAdjust,
     //Division by the following indicates a scale of 1:10 for the pixel:earth's radius
     EarthAdjust=637800;
     boolean threadKill,repaintThreadKill;
     int deltat=100;
-    vec R,V,Vector;
+    vec R,V,Vector,R0,dv;
     pos Pi,Pf;
     double G = 6.67*Math.pow(10,-11),
            M = 5.97*Math.pow(10,24);
     Hohmann hoh;
+    double E=0,dvx=0,dvy=0;
+    double T=0;
     int t;
-    
+    pos Renter;
+    FileInputStream textFile;
     PrintWriter writer;
-    
-
+    int counter;
+    Scanner inFile;
     //constructor
-    public orbitPanel(pos pi,pos pf,int WindowWidth,int WindowHeight ){
+    public orbitPanel(pos pi,pos pf,int WindowWidth,int WindowHeight,PrintWriter writer, int counter ){
         Pi=pi;Pf=pf;
         man = new Maneuvers(); 
         ovals = new ArrayList<>();
         this.WidthAdjust = WindowWidth/2;
         this.HeightAdjust = WindowHeight/2;
-        
-        
+        this.writer=writer;
+        this.counter=counter;
+        // try{
+             // textFile = new FileInputStream("name653.txt");
+             // inFile = new Scanner(textFile);}
+        // catch(IOException ioe)
+        // {
+            // System.out.println("IOException");
+        // }
         /**
          *Making two circles around the earth, representing the orbits,
          *I understand that this could be done using drawOval method in the paintComponent.
@@ -55,23 +67,17 @@ public class orbitPanel extends JPanel
             //therefore when added to the JPanel, one point of the second orbit goes after one from the first one.
             ovals.add(new Oval((int) (man.getvr(b).x / EarthAdjust) + WidthAdjust, (int) (man.getvr(b).y / EarthAdjust) + HeightAdjust, 1, 1));
         }
-        //for(int i=0;i<2;i++){
+        
         Vector  = new vec(0,0,0);
         vec vvv = new vec(0,60,0);
         R = man.getvr(Pi);V=man.getvv(Pi);
+        R0= man.getvr(Pi);
         hoh = new Hohmann(pi,pf);
         threadKill=false;
         repaintThreadKill=false;
-               try{
-        writer = new PrintWriter("/files/name"+".txt", "UTF-8");
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-            System.out.println("setup failed");
-        }draw();//}
-        
-        
-        
+        flag=false;
+
+            
     }// end constructor
     
     //draw() is a method and will be called directly from inside of the Controller to invoker the animations and calculations.
@@ -92,29 +98,53 @@ public class orbitPanel extends JPanel
                        if(threadKill ==true){thread.interrupt();}
                        //t helps us keep track of the real time. t and deltat are both in seconds.
                        t+=deltat;
-                       Random rand = new Random(); 
-                       double dx = rand.nextDouble()*10-5;
-                       double dy = rand.nextDouble()*10-5;
+                       if(flag==false){
+                       Random rand = new Random();
                        
+                        dvx = Double.parseDouble(inFile.nextLine());
+                        dvy = Double.parseDouble(inFile.nextLine());
+                        System.out.println(dvx+"  "+dvy);
+                        dv = new vec(dvx,dvy,0);
+
                            
-                       writer.print(dx+ "  ");
-                       writer.println(dy);
-                       
+                    // writer.println(dvx);
+                    // writer.println(dvy);
                        
                       
-                       vec dv = new vec(dx,dy,0);
+                       
+                       
                        //first Hohmann impulse
-                       if(t>hoh.Time1()-deltat/2){
+                       if(t>hoh.Time1()+deltat){
                            V=Vector.getSub(V,dv);
-                           if(Vector.getMag(R) < Vector.getMag(man.getvr(Pi))+100 && Vector.getMag(R) > Vector.getMag(man.getvr(Pi))-100){
-                               ((Timer)e.getSource()).stop();
-                               thread.interrupt();
+                           E += Math.pow(Vector.getMag(dv),2)+2*Vector.getMag(dv)*Vector.getMag(V);
+                           if(Vector.getMag(R) < Vector.getMag(man.getvr(Pi))
+                           || t-hoh.Time1()>500000
+                           ){
+                               
+                              
+                              double fi= Math.acos(Vector.getDot(R,R0)/Math.pow((Vector.getMag(R)),2));
+                              if(R.y<0){
+                                  Renter = new pos(Pi.a,0,0,2*Math.PI-fi,0,0);
+                              }
+                              else{
+                                  Renter = new pos(Pi.a,0,0,fi,0,0);
+                              }
+                              vec Vfinal = man.getvv(Renter);
+                              vec deltaVfinal = Vector.getSub(Vfinal,V);
+                              
+                             T=t-hoh.Time1();
+                              E+= Math.pow(Vector.getMag(deltaVfinal),2);
+                             System.out.println(counter+"  " + E + "  " + T);
+                              V = Vfinal;
+                              flag=true;
+                              ((Timer)e.getSource()).stop();
+                              thread.interrupt();
                             }
                        }
                        if(t>hoh.Time1()-deltat/2 && t<hoh.Time1()+deltat/2){
                            vec deltav = new vec(+1000,0,0);
                            V=Vector.getSub(V,deltav);
-                       }
+                       }}
                        
                        //second Hohmann impulse 
                        R = integratorOfRadius(R, V);

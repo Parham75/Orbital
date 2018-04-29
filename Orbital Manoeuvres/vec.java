@@ -21,8 +21,8 @@ public class vec
         this.z = z;}
     // Magnitude of a vector
     public  double getMag(vec a){
-    	double mag = Math.pow(a.x*a.x+a.y*a.y+a.z*a.z,0.5);
-    	return mag;
+        double mag = Math.pow(a.x*a.x+a.y*a.y+a.z*a.z,0.5);
+        return mag;
     }
     // Subtraction of two vectors
         public vec getSub(vec a,vec b){
@@ -55,5 +55,9 @@ public class vec
         return cpro;
     }
     
-    
+        public double getDot(vec a,vec b) {
+            double dot;
+            dot = a.x*b.x+a.y*b.y+a.z*b.z;
+            return dot;
+        }
 }

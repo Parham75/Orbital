@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=orbitPanel
-comment1.params=pi\ pf\ WindowWidth\ WindowHeight
-comment1.target=orbitPanel(pos,\ pos,\ int,\ int)
+comment1.params=pi\ pf\ WindowWidth\ WindowHeight\ writer\ counter
+comment1.target=orbitPanel(pos,\ pos,\ int,\ int,\ java.io.PrintWriter,\ int)
 comment2.params=
 comment2.target=void\ draw()
 comment3.params=

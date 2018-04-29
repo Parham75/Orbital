@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.*;
+import java.io.*;
 /**
  * Write a description of class OrbitPane here.
  * 
@@ -12,7 +13,7 @@ public class OrbitPane extends JPanel
 {
     orbitPanel op;
     int WindowWidth,WindowHeight;
-   
+    PrintWriter writer;
     JButton jbDraw = new JButton("Simulate the Trajectory")
     , jbClose = new JButton("Close")
     , jbBack = new JButton("Back");
@@ -31,11 +32,26 @@ public class OrbitPane extends JPanel
     {
         this.WindowWidth = WindowWidth;
         this.WindowHeight = WindowHeight;
-        op = new orbitPanel(pi,pf,WindowWidth,WindowHeight);
-        op.setLayout(null);
-        op.setLocation(0,0);
-        op.setSize(WindowWidth,WindowHeight);
         int BaClWidth = width/2;
+        for(int i=0;i<1;i++){
+            
+            try{
+                writer = new PrintWriter("name"+i+".txt", "UTF-8");
+                
+                op = null;
+                op = new orbitPanel(pi,pf,WindowWidth,WindowHeight,writer,i);
+                op.setLayout(null);
+                op.setLocation(0,0);
+                op.setSize(WindowWidth,WindowHeight);
+                op.draw();
+                
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+                System.out.println("setup failed");
+            }   
+        }
+        
         
         jlVelNote1.setBounds(space+WindowWidth,space,width,height);
         jlVel1.setBounds(space+WindowWidth,2*space+height,width,height);
