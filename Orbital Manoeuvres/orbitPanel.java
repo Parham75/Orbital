@@ -101,15 +101,15 @@ public class orbitPanel extends JPanel
                        if(flag==false){
                        Random rand = new Random();
                        
-                        dvx = Double.parseDouble(inFile.nextLine());
-                        dvy = Double.parseDouble(inFile.nextLine());
+                        double dvx = 1e-4 + (1e-3 - 1e-4) * rand.nextDouble();
+                        double dvy = 1e-4 + (1e-3 - 1e-4) * rand.nextDouble();
                         System.out.println(dvx+"  "+dvy);
                         dv = new vec(dvx,dvy,0);
 
                            
-                    // writer.println(dvx);
-                    // writer.println(dvy);
-                       
+                        writer.println(dvx);
+                        writer.println(dvy);
+                    
                       
                        
                        
