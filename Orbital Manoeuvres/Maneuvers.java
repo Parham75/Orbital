@@ -4,9 +4,7 @@
  * Maneuvers class is the main class in
  * calculating the final results using pos,
  * and the logic used in the program.
- * 
- * @author (Mohammad Kordzanganeh) 
- * @version (15 Feb)
+
  */
 public class Maneuvers
 {

@@ -8,7 +8,7 @@ public class StarterPane extends JPanel
     JLabel jlIntro2 = new JLabel("Manoeuvres AI Simulator");
     JLabel jlChoose = new JLabel("Please Choose one of");
     JLabel jlChoose2 = new JLabel("the following Options");
-    JButton jbHoh = new JButton("Circular Hohmann");
+    JButton jbHoh = new JButton("The dodge Maneuver");
     JButton jbShowVelPos = new JButton ("Show Velocity and Position");
     JButton jbAbout = new JButton("About Us");
     JButton jbExit = new JButton("Exit");

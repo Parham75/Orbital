@@ -2,12 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.*;
-/**
- * Write a description of class ShowVelPosPane here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class ShowVelPosPane extends JPanel
 {
       int space,width,height,HeightOfPage;

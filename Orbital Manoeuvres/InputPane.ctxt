@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=InputPane
-comment0.text=\n\ Write\ a\ description\ of\ class\ InputPane\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=space\ width\ height\ LabelColor\ BackColor
 comment1.target=InputPane(int,\ int,\ int,\ java.awt.Color,\ java.awt.Color)
 numComments=2

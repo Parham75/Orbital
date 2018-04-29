@@ -1,10 +1,5 @@
 
-/**
- * Write a description of class Hohmann here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class Hohmann extends Maneuvers
 {
     pos pi,pf;

@@ -1,10 +1,4 @@
 
-/**
- * Write a description of class pos here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 
 //A class solely representing the position of an object
 public class pos

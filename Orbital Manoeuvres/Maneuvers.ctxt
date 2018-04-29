@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Maneuvers
-comment0.text=\n\ Maneuvers\ class\ is\ the\ main\ class\ in\n\ calculating\ the\ final\ results\ using\ pos,\n\ and\ the\ logic\ used\ in\ the\ program.\n\ \n\ @author\ (Mohammad\ Kordzanganeh)\ \n\ @version\ (15\ Feb)\n
+comment0.text=\n\ Maneuvers\ class\ is\ the\ main\ class\ in\n\ calculating\ the\ final\ results\ using\ pos,\n\ and\ the\ logic\ used\ in\ the\ program.\n\n
 comment1.params=
 comment1.target=Maneuvers()
 comment10.params=a

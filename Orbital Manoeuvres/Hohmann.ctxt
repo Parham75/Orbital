@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=Hohmann
-comment0.text=\n\ Write\ a\ description\ of\ class\ Hohmann\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=pi\ pf
 comment1.target=Hohmann(pos,\ pos)
 comment10.params=
