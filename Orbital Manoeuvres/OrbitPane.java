@@ -34,6 +34,26 @@ public class OrbitPane extends JPanel
     JLabel jlVel1 = new JLabel(" X i + Y j"+"   "+"m/s")
     , jlVel2 = new JLabel(" X i + Y j"+"   "+"m/s");
     
+    private Container c;
+    private JPanel imagePanel;
+    
+    private void initialize() {
+        
+        
+        imagePanel = new JPanel() {
+            public void paint(Graphics g) {
+                try {
+                    BufferedImage image = ImageIO.read(new File("/Users/Mohammadreza/Documents/GitHub/Orbital/Orbital Manoeuvres/Earth.jpg"));
+                    g.drawImage(image, 1000, 2000, null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        imagePanel.setPreferredSize(new Dimension(200, 200));
+        c.add(imagePanel);
+    }
+
     
     /**
      * Constructor for objects of class OrbitPane
