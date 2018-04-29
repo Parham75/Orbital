@@ -13,12 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-/**
- * Write a description of class OrbitPane here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class OrbitPane extends JPanel
 {
     orbitPanel op;
@@ -38,8 +33,7 @@ public class OrbitPane extends JPanel
     private JPanel imagePanel;
     
     private void initialize() {
-        
-        
+       
         imagePanel = new JPanel() {
             public void paint(Graphics g) {
                 try {
@@ -50,7 +44,7 @@ public class OrbitPane extends JPanel
                 }
             }
         };
-        imagePanel.setPreferredSize(new Dimension(200, 200));
+        imagePanel.setPreferredSize(new Dimension(200, 2));
         c.add(imagePanel);
     }
 
