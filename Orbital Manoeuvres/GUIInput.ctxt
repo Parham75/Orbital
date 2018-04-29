@@ -1,4 +1,5 @@
 #BlueJ class context
-comment0.params=space\ width\ height\ LabelColor\ BackColor
-comment0.target=GUIInput(int,\ int,\ int,\ java.awt.Color,\ java.awt.Color)
-numComments=1
+comment0.target=GUIInput
+comment1.params=space\ width\ height\ LabelColor\ BackColor
+comment1.target=GUIInput(int,\ int,\ int,\ java.awt.Color,\ java.awt.Color)
+numComments=2

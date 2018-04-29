@@ -3,6 +3,16 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.*;
 import java.io.*;
+import java.applet.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  * Write a description of class OrbitPane here.
  * 
@@ -64,12 +74,14 @@ public class OrbitPane extends JPanel
         jbBack.setBounds(space+WindowWidth,WindowHeight-space-height,BaClWidth,height);
         jbClose.setBounds(2*space+WindowWidth+BaClWidth,WindowHeight-space-height,BaClWidth,height);
         
-        this.setBackground(BackColor);
+        //this.setBackground(BackColor);
         jlVelNote1.setForeground(LabelColor);
         jlVel1.setForeground(LabelColor);
         jlVelNote2.setForeground(LabelColor);
         jlVel2.setForeground(LabelColor);
-
+        
+       
+       
         
         add(op);
         add(jbDraw);

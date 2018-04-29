@@ -72,7 +72,8 @@ public class Controller implements ActionListener
                    {
     
                     double a = Double.parseDouble(input.ip.jtfa.getText());
-                    double a2 = Double.parseDouble(input.ip.jtfa2.getText());
+                    double a2 = 1.5e8;
+               
                     
                     if(a>=0 || a2>=0){
                         // Eliminating the unshowable, the numbers are correspondent to the information given in the infoBox

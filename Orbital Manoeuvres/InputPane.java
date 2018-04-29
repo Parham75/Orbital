@@ -15,8 +15,6 @@ public class InputPane extends JPanel
       JTextField jtfa = new JTextField(10);
       JButton jbSubmit = new JButton("Submit");
       JButton jbClose = new JButton("Close");
-      JLabel jla2 = new JLabel("Length of Semi Major Axis 2");
-      JTextField jtfa2 = new JTextField(10);
       JButton jbBack = new JButton("Back");
 
 
@@ -25,8 +23,6 @@ public class InputPane extends JPanel
        
           jla.setBounds(space , space, width, height);
           jtfa.setBounds(2*space+width , space, width, height);
-          jla2.setBounds(space , height+2*space, width, height);
-          jtfa2.setBounds(2*space+width, height+2*space, width,height);
           int ButtonWidth = width/2;
           jbSubmit.setBounds((int)(1.5*space+0.5*width), 5*space+2*height, ButtonWidth,height);
           jbBack.setBounds((int)(2.5*space+0.5*width+ButtonWidth), 5*space+2*height, ButtonWidth,height);
@@ -34,11 +30,8 @@ public class InputPane extends JPanel
           
           this.setBackground(BackColor);
           jla.setForeground(LabelColor);
-          jla2.setForeground(LabelColor);
           add(jla);
           add(jtfa);
-          add(jla2);
-          add(jtfa2);
           
           add(jbSubmit);
           add(jbClose);
