@@ -29,7 +29,7 @@ public class Main
         //Colours are passed from here to all of the GUIs and JPanels.
         Color LabelColor= Color.decode("#d3d3d3")
         , BackColor = Color.decode("#2a2366");
-        Image img = Toolkit.getDefaultToolkit().createImage("background.jpg");
+        
         GUIStarter win1 = new GUIStarter(space,width,height,LabelColor,BackColor);
         
         Controller con = new Controller(win1);

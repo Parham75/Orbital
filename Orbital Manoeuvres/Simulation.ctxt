@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Simulation
+comment1.params=pi\ pf\ writer\ counter\ optimiser\ energy
+comment1.target=Simulation(pos,\ pos,\ java.io.PrintWriter,\ int,\ java.io.PrintWriter,\ double)
+comment2.params=
+comment2.target=void\ simulate()
+comment3.params=
+comment3.target=void\ run()
+comment4.params=prevRad\ Vel
+comment4.target=vec\ integratorOfRadius(vec,\ vec)
+comment5.params=prevRad\ prevVel
+comment5.target=vec\ integratorOfVelocity(vec,\ vec)
+comment6.params=j
+comment6.target=int\ minfinder(int)
+comment7.params=arr\ i
+comment7.target=optseries\ separator(java.util.ArrayList,\ int)
+comment8.params=op
+comment8.target=void\ bubbleSort(optseries[])
+numComments=9

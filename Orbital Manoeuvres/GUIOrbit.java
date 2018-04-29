@@ -9,8 +9,8 @@ import javax.swing.*;
 public class GUIOrbit extends JFrame 
 {
     vec R,V;
-    int WindowWidth = 500,
-    WindowHeight = 500;
+    int WindowWidth = 700,
+    WindowHeight = 700;
     int opWidth,opHeight;
 
     vec Vector;

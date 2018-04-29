@@ -3,22 +3,17 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.geom.*;
 import java.io.*;
-import java.applet.*;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+/**
+ * Write a description of class OrbitPane here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
 public class OrbitPane extends JPanel
 {
     orbitPanel op;
     int WindowWidth,WindowHeight;
-    PrintWriter writer;
+    PrintWriter writer,optimiser;
     JButton jbDraw = new JButton("Simulate the Trajectory")
     , jbClose = new JButton("Close")
     , jbBack = new JButton("Back");
@@ -28,26 +23,7 @@ public class OrbitPane extends JPanel
     
     JLabel jlVel1 = new JLabel(" X i + Y j"+"   "+"m/s")
     , jlVel2 = new JLabel(" X i + Y j"+"   "+"m/s");
-    
-    private Container c;
-    private JPanel imagePanel;
-    
-    private void initialize() {
-       
-        imagePanel = new JPanel() {
-            public void paint(Graphics g) {
-                try {
-                    BufferedImage image = ImageIO.read(new File("/Users/Mohammadreza/Documents/GitHub/Orbital/Orbital Manoeuvres/Earth.jpg"));
-                    g.drawImage(image, 1000, 2000, null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        imagePanel.setPreferredSize(new Dimension(200, 2));
-        c.add(imagePanel);
-    }
-
+    Simulation SI;
     
     /**
      * Constructor for objects of class OrbitPane
@@ -57,25 +33,29 @@ public class OrbitPane extends JPanel
         this.WindowWidth = WindowWidth;
         this.WindowHeight = WindowHeight;
         int BaClWidth = width/2;
-        for(int i=0;i<1;i++){
+        
+        try{
+            optimiser = new PrintWriter("Optimiser.txt", "UTF-8");
+        }catch(IOException exception){
+            exception.printStackTrace();
+            System.out.println("Failed");
+        }
+        for(int i=0;i<500;i++){
             
             try{
                 writer = new PrintWriter("name"+i+".txt", "UTF-8");
-                
-                op = null;
-                op = new orbitPanel(pi,pf,WindowWidth,WindowHeight,writer,i);
-                op.setLayout(null);
-                op.setLocation(0,0);
-                op.setSize(WindowWidth,WindowHeight);
-                op.draw();
-                
+                SI = new Simulation(pi,pf,writer,i,optimiser,0);
+                SI.simulate();
             }
             catch (IOException ex) {
                 ex.printStackTrace();
                 System.out.println("setup failed");
             }   
-        }
-        
+         }
+        writer.close();
+        optimiser.close();
+        op = new orbitPanel(pi,pf,WindowWidth,WindowHeight,SI);
+        op.setVisible(true);
         
         jlVelNote1.setBounds(space+WindowWidth,space,width,height);
         jlVel1.setBounds(space+WindowWidth,2*space+height,width,height);
@@ -88,14 +68,12 @@ public class OrbitPane extends JPanel
         jbBack.setBounds(space+WindowWidth,WindowHeight-space-height,BaClWidth,height);
         jbClose.setBounds(2*space+WindowWidth+BaClWidth,WindowHeight-space-height,BaClWidth,height);
         
-        //this.setBackground(BackColor);
+        this.setBackground(BackColor);
         jlVelNote1.setForeground(LabelColor);
         jlVel1.setForeground(LabelColor);
         jlVelNote2.setForeground(LabelColor);
         jlVel2.setForeground(LabelColor);
-        
-       
-       
+
         
         add(op);
         add(jbDraw);

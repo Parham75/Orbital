@@ -10,6 +10,7 @@ public class Controller implements ActionListener
     GUIShowVelPos gsvp;
     public pos pi,pf;
     Hohmann hoh;
+    Dimension width,height;
     
     Maneuvers man = new Maneuvers();
     //constructor
@@ -70,10 +71,9 @@ public class Controller implements ActionListener
             try{    
                 if (ae.getSource()==input.ip.jbSubmit) 
                    {
-    
+                    
                     double a = Double.parseDouble(input.ip.jtfa.getText());
-                    double a2 = 1.5e8;
-               
+                    double a2 = Double.parseDouble(input.ip.jtfa2.getText());
                     
                     if(a>=0 || a2>=0){
                         // Eliminating the unshowable, the numbers are correspondent to the information given in the infoBox
@@ -90,6 +90,7 @@ public class Controller implements ActionListener
                             hoh = new Hohmann(pi,pf);
                         
                             input.setVisible(false);
+                            
                             go = new GUIOrbit(pi,pf,input.space,input.width,input.height,input.LabelColor,input.BackColor);         
                             go.setVisible(true);
                             
@@ -192,7 +193,6 @@ public class Controller implements ActionListener
             if(ae.getSource()==go.op.jbDraw){
                 
                 go.op.op.draw();
-                
                 
                 String Vel1x = String.valueOf(hoh.getHohdv1().x),
                        Vel1y = String.valueOf(hoh.getHohdv1().y),

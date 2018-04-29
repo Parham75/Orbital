@@ -6,21 +6,22 @@ import javax.swing.*;
 import java.lang.Object;
 import java.util.Random; 
 import java.io.*; 
-import java.io.PrintWriter; 
 import java.util.Scanner;
+import javax.imageio.ImageIO;
 
 public class orbitPanel extends JPanel
 {
-
+    JLabel label1;
     public static ArrayList<Oval> ovals;
     Maneuvers man;
+    Image img;
     boolean flag;
     Thread thread,repaintThread;
     int WidthAdjust,HeightAdjust,
     //Division by the following indicates a scale of 1:10 for the pixel:earth's radius
     EarthAdjust=637800;
     boolean threadKill,repaintThreadKill;
-    int deltat=100;
+    int deltat=200;
     vec R,V,Vector,R0,dv;
     pos Pi,Pf;
     double G = 6.67*Math.pow(10,-11),
@@ -34,8 +35,9 @@ public class orbitPanel extends JPanel
     PrintWriter writer;
     int counter;
     Scanner inFile;
+    
     //constructor
-    public orbitPanel(pos pi,pos pf,int WindowWidth,int WindowHeight,PrintWriter writer, int counter ){
+    public orbitPanel(pos pi,pos pf,int WindowWidth,int WindowHeight, Simulation s ){
         Pi=pi;Pf=pf;
         man = new Maneuvers(); 
         ovals = new ArrayList<>();
@@ -43,13 +45,22 @@ public class orbitPanel extends JPanel
         this.HeightAdjust = WindowHeight/2;
         this.writer=writer;
         this.counter=counter;
-        // try{
-             // textFile = new FileInputStream("name653.txt");
-             // inFile = new Scanner(textFile);}
-        // catch(IOException ioe)
-        // {
-            // System.out.println("IOException");
-        // }
+        this.setSize(WindowWidth,WindowHeight );
+        this.setLayout(null);
+        this.setLocation(0,0);
+        try{
+        img = ImageIO.read(new File("e.jpg"));
+        }
+        catch(IOException e){System.out.println("I'm an idiot sandwich");}
+        
+        int j = s.minfinder(1);
+        try{
+            textFile = new FileInputStream("name90.txt");
+             inFile = new Scanner(textFile);}
+        catch(IOException ioe)
+         {
+            System.out.println("IOException");
+         }
         /**
          *Making two circles around the earth, representing the orbits,
          *I understand that this could be done using drawOval method in the paintComponent.
@@ -74,7 +85,6 @@ public class orbitPanel extends JPanel
         R0= man.getvr(Pi);
         hoh = new Hohmann(pi,pf);
         threadKill=false;
-        repaintThreadKill=false;
         flag=false;
 
             
@@ -94,30 +104,24 @@ public class orbitPanel extends JPanel
                Timer timer = new Timer(1, new ActionListener() {
                    @Override
                    public void actionPerformed(ActionEvent e) {
-                       //checking if this thread needs to be killed, controlled from the Controller.
-                       if(threadKill ==true){thread.interrupt();}
-                       //t helps us keep track of the real time. t and deltat are both in seconds.
-                       t+=deltat;
-                       if(flag==false){
-                       Random rand = new Random();
-                       
-                        double dvx = 1e-4 + (1e-3 - 1e-4) * rand.nextDouble();
-                        double dvy = 1e-4 + (1e-3 - 1e-4) * rand.nextDouble();
-                        System.out.println(dvx+"  "+dvy);
-                        dv = new vec(dvx,dvy,0);
-
-                           
-                        writer.println(dvx);
-                        writer.println(dvy);
-                    
-                      
-                       
-                       
-                       //first Hohmann impulse
+                   //checking if this thread needs to be killed, controlled from the Controller.
+                   if(threadKill ==true){thread.interrupt();}
+                   //t helps us keep track of the real time. t and deltat are both in seconds.
+                   t+=deltat;
+                   if(flag==false){
+                   Random rand = new Random();
+                    try{   
+                    dvx = Double.parseDouble(inFile.nextLine());
+                    dvy = Double.parseDouble(inFile.nextLine());}
+                    catch(java.util.NoSuchElementException excep){ dvx=0;dvy=0;}
+                    catch(NumberFormatException excp){dvx=0;dvy=0;}
+                    System.out.println(dvx + "  " + dvy);
+                    dv = new vec(dvx,dvy,0);
+                    //first Hohmann impulse
                        if(t>hoh.Time1()+deltat){
                            V=Vector.getSub(V,dv);
                            E += Math.pow(Vector.getMag(dv),2)+2*Vector.getMag(dv)*Vector.getMag(V);
-                           if(Vector.getMag(R) < Vector.getMag(man.getvr(Pi))
+                           if(Vector.getMag(R) < (Vector.getMag(man.getvr(Pi))+100000)
                            || t-hoh.Time1()>500000
                            ){
                                
@@ -130,15 +134,12 @@ public class orbitPanel extends JPanel
                                   Renter = new pos(Pi.a,0,0,fi,0,0);
                               }
                               vec Vfinal = man.getvv(Renter);
-                              vec deltaVfinal = Vector.getSub(Vfinal,V);
                               
-                             T=t-hoh.Time1();
-                              E+= Math.pow(Vector.getMag(deltaVfinal),2);
-                             System.out.println(counter+"  " + E + "  " + T);
+                              
+                             
                               V = Vfinal;
                               flag=true;
-                              ((Timer)e.getSource()).stop();
-                              thread.interrupt();
+                              threadKill=true;
                             }
                        }
                        if(t>hoh.Time1()-deltat/2 && t<hoh.Time1()+deltat/2){
@@ -171,7 +172,7 @@ public class orbitPanel extends JPanel
                    @Override
                    public void actionPerformed(ActionEvent e) {
                        //checking if this thread needs to be killed, controlled from the Controller.
-                       if(repaintThreadKill ==true){thread.interrupt();}
+                       if(threadKill ==true){thread.interrupt();}
                        
                        repaint();
                        
@@ -222,6 +223,7 @@ public class orbitPanel extends JPanel
                 Oval temp = ovals.get(i);
                 g.drawOval(temp.x,temp.y,temp.width,temp.height);
             }
+        g.drawImage(img,WidthAdjust - 5, HeightAdjust - 5, null);
  
     }//end paintComponent
 
